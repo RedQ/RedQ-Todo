@@ -1,0 +1,19 @@
+{
+  "name": "chrome",
+  "version": "0.0.0",
+  "authors": [
+    "tareq <tareq.jobayere@facebook.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "install" : {
+        "path" : "js"
+  }
+}

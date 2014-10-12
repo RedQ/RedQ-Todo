@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TodoApp">
+<head>
+	<meta charset="UTF-8">	
+	<link rel="stylesheet" href="css/bootstrap.css">	
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/todo.css">
+	
+
+	<script src="js/jquery/jquery.js"></script>
+	<script src="js/jquery-ui/jquery-ui.js"></script>
+	<script src="js/angular/angular.js"></script>	
+	<script src="js/angular-ui-sortable/sortable.js"></script>	
+	<script src="js/angular-local-storage/angular-local-storage.js"></script>
+	<script src="todo.js"></script>
+</head>
+<body>
+
+		<div ng-controller="TodoContrl" ng-init="init()">
+				
+			
+
+			<div class="container" id="box">
+				<div class="row">
+					<h3 class="text-center htext"><mark>{{title}}</mark></h3>
+					
+<!-- {{ clock | date:'medium'}} -->
+{{ clock | date:'mediumTime'}}
+					<div class="col-xs-3 lefthand">
+					
+						<ul class="list-unstyled">
+							<li ng-click="myFilter = {}">
+								<a href="#" >
+									All <span class="badge alert-info pull-right" ng-show="todos.length > 0">{{todos.length}}</span>
+								</a>
+							</li>
+<!-- 
+							<li ng-click="myFilter = {done: false}">
+								<a href="#" >
+									<span class="badge alert-danger pull-right" ng-if="remaining()">{{remaining()}}</span>
+									Incomplete
+								</a>
+							</li>
+
+							<li ng-click="myFilter = {done: true}">
+								<a href="#"> 
+									Archive <span class="badge alert-success pull-right" ng-if="archive()">{{archive()}}</span>
+								</a>
+							</li> -->
+						</ul>
+						
+					</div>
+
+					
+					<div class="col-xs-9 main">
+
+
+
+
+						<ul ui-sortable="sortableOptions" ng-model="todos">
+						  <li ng-repeat="todo in todos | filter: myFilter"  style="border-left:3px solid {{todo.color}};">
+						  	 
+							
+							
+								<div class="config" ng-class="{ 'hidden': ! todo.details , 'animated zoomIn': todo.details }">
+									<ng-color-picker selected="todo.color" ng-model="todo.color"></ng-color-picker>				
+								</div>
+							
+
+<!-- 							<div ng-init="todo.details = false" ng-show="todo.details">
+								<div class="config animated zoomIn">
+									<ng-color-picker selected="todo.color" ng-model="todo.color"></ng-color-picker>				
+								</div> 
+							</div> -->
+
+						    <span class="count">{{$index + 1 }}</span>
+						      	<a class="pull-right btn btn-xs cross"  ng-click="removeTodo(this)"><span class="glyphicon glyphicon-remove"></span></a>
+							 	 
+							 	<!--  <span ng-click="showDetails = !showDetails" class="glyphicon glyphicon-paperclip pin"></span>  -->
+							 	 <span ng-click="todo.details = !todo.details" class="glyphicon glyphicon-paperclip pin"></span> 
+					    
+						  		
+								<a no-drag tx-contenteditable ng-model="todo.title" class="btn" href="#">
+									{{ todo.title || ' ' }}  <span> </span>
+								</a>
+						
+
+						  </li>
+						</ul>
+                 
+
+     				</div>
+
+
+
+
+		    	</div> <!--  end of row  -->
+
+
+		    </div> <!--  end of container -->
+		    			<div id="postText">
+							<input class="form-control" ng-enter="addIntodo()" ng-model="todoText" placeholder="What's on your mind ?" />
+						</div>
+    	</div>	<!--  end of controller  -->	  
+	
+
+</body>
+</html>
